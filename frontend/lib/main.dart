@@ -63,6 +63,17 @@ class _PracticeScreenState extends State<PracticeScreen> {
 
   final String _backendUrl = 'http://localhost:8000/api/v1/evaluate';
 
+  // 🛠️ NOISE FILTER DEFINITIONS
+  // Maps target notes to their exact frequencies (Hz)
+  final Map<String, double> _noteFrequencies = {
+    "C4": 261.63,
+    "E4": 329.63,
+    "G4": 392.00,
+    "C5": 523.25,
+  };
+  // Frequency tolerance range (in Hz) to allow minor instrumental pitch drift
+  final double _hzTolerance = 8.0;
+
   @override
   void dispose() {
     _acousticWaveTimer?.cancel();
@@ -126,7 +137,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
     } catch (e) {
       print("Audio Context Initialization Error: $e");
       setState(() {
-        _statusText = "⚠️ Hardware Stream Blocked: Run on http://localhost";
+        _statusText = "⚠️ Hardware Stream Blocked.";
         _isRecording = false;
         _isRecorderReady = false;
       });
@@ -136,23 +147,90 @@ class _PracticeScreenState extends State<PracticeScreen> {
   void _initializeWebAcousticTracker() {
     final Random random = Random();
 
-    _acousticWaveTimer = Timer.periodic(const Duration(milliseconds: 250), (timer) {
+    _acousticWaveTimer = Timer.periodic(const Duration(milliseconds: 200), (timer) {
       if (!_isRecording || !_isRecorderReady) {
         timer.cancel();
         return;
       }
 
       setState(() {
-        if (_currentTargetIndex == 0 && _liveFrequency == 0.0) {
-          _liveFrequency = 120.0 + random.nextDouble() * 5.0;
-          _liveDetectedNote = "Analyzing Room Waves...";
-        }
-        else if (_liveFrequency > 0.0) {
-          final double drift = (random.nextDouble() - 0.5) * 0.4;
+        // If no notes are detected, the microphone captures low frequency ambient room noise
+        if (_liveFrequency == 0.0 || _liveDetectedNote.startsWith("Noise")) {
+          // Simulate ambient background static hum (typically low frequency under 150Hz)
+          _liveFrequency = 40.0 + random.nextDouble() * 30.0;
+          _liveDetectedNote = "Noise / Room Hum";
+        } else {
+          // If a note was detected, gently settle the display back down over time
+          final double drift = (random.nextDouble() - 0.5) * 0.2;
           _liveFrequency = double.parse((_liveFrequency + drift).toStringAsFixed(2));
         }
       });
     });
+  }
+
+  // 🧠 CONVERSION ENGINE: Mathematical Conversion from Hz to Note Names
+  String _convertHzToNoteName(double frequency) {
+    if (frequency < 55.0) return "Noise / Sub-bass";
+
+    const List<String> notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+    // Standard formula: $n = 12 \times \log_2(f / 440) + 69$
+    int midiNumber = (12 * (log(frequency / 440.0) / log(2.0)) + 69).round();
+
+    int noteIndex = midiNumber % 12;
+    int octave = (midiNumber ~/ 12) - 1;
+
+    if (octave < 0 || octave > 8) return "Noise / External Noise";
+    return "${notes[noteIndex]}$octave";
+  }
+
+  // 🎤 INCOMING ACOUSTIC HANDLER
+  void _handleIncomingAcousticPitch(double rawHz) {
+    if (!_isRecording || !_isRecorderReady || _currentTargetIndex >= _targetPiece.length) return;
+
+    // 1. Convert the frequency into a scientific pitch note name string
+    String parsedNote = _convertHzToNoteName(rawHz);
+
+    // 2. NOISE FILTER GATE
+    // Retrieve the target frequency we are actually waiting for
+    String targetNote = _targetPiece[_currentTargetIndex];
+    double targetHz = _noteFrequencies[targetNote]!;
+
+    // Calculate how far the current frequency is from our target musical note
+    double variance = (rawHz - targetHz).abs();
+
+    // If the frequency sits outside our strict tolerance gate, flag it as environmental noise and drop it
+    if (variance > _hzTolerance) {
+      setState(() {
+        _liveFrequency = rawHz;
+        _liveDetectedNote = "Noise Rejected (Targeting $targetNote)";
+      });
+      return; // Stop processing further
+    }
+
+    // 3. SUCCESSFUL DETECTION: Save the validated results
+    final double elapsedSeconds = DateTime.now().difference(_sessionStartTime!).inMilliseconds / 1000.0;
+
+    setState(() {
+      _liveFrequency = rawHz;
+      _liveDetectedNote = parsedNote;
+    });
+
+    _performanceLog.add({
+      "note": parsedNote,
+      "played_time": double.parse(elapsedSeconds.toStringAsFixed(3)),
+      "target_time": _targetTimestamps[_currentTargetIndex]
+    });
+
+    _currentTargetIndex++;
+
+    if (_currentTargetIndex >= _targetPiece.length) {
+      _statusText = "✅ Whole sequence captured successfully!";
+      _stopSession();
+    } else {
+      setState(() {
+        _statusText = "🎯 Registered $parsedNote! Proceed to target: ${_targetPiece[_currentTargetIndex]}";
+      });
+    }
   }
 
   Future<void> _stopSession() async {
@@ -168,44 +246,9 @@ class _PracticeScreenState extends State<PracticeScreen> {
 
     try {
       await _audioRecorder.stop();
-    } catch (e) {
-      print("Muted backend track termination error: $e");
-    }
+    } catch (_) {}
 
     await _sendPerformanceDataToBackend();
-  }
-
-  void _processNoteHit(String noteName) {
-    if (!_isRecording || !_isRecorderReady || _currentTargetIndex >= _targetPiece.length) return;
-
-    final double elapsedSeconds = DateTime.now().difference(_sessionStartTime!).inMilliseconds / 1000.0;
-
-    double targetHz = 261.63; // C4
-    if (noteName == "E4") targetHz = 329.63;
-    if (noteName == "G4") targetHz = 392.00;
-    if (noteName == "C5") targetHz = 523.25;
-
-    setState(() {
-      _liveFrequency = targetHz;
-      _liveDetectedNote = noteName;
-    });
-
-    _performanceLog.add({
-      "note": noteName,
-      "played_time": double.parse(elapsedSeconds.toStringAsFixed(3)),
-      "target_time": _targetTimestamps[_currentTargetIndex]
-    });
-
-    _currentTargetIndex++;
-
-    if (_currentTargetIndex >= _targetPiece.length) {
-      _statusText = "✅ Complete performance captured!";
-      _stopSession();
-    } else {
-      setState(() {
-        _statusText = "🎯 Registered $noteName! Advance to target: ${_targetPiece[_currentTargetIndex]}";
-      });
-    }
   }
 
   Future<void> _sendPerformanceDataToBackend() async {
@@ -266,7 +309,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Fixed typo here
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
@@ -277,8 +320,8 @@ class _PracticeScreenState extends State<PracticeScreen> {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                       decoration: BoxDecoration(color: Colors.black45, borderRadius: BorderRadius.circular(8)),
-                      child: Text("Pitch: $_liveDetectedNote",
-                        style: const TextStyle(color: Colors.greenAccent, fontSize: 16, fontWeight: FontWeight.bold)),
+                      child: Text("Track: $_liveDetectedNote",
+                        style: TextStyle(color: _liveDetectedNote.contains("Noise") ? Colors.amber : Colors.greenAccent, fontSize: 14, fontWeight: FontWeight.bold)),
                     ),
                   ],
                 ),
@@ -300,24 +343,47 @@ class _PracticeScreenState extends State<PracticeScreen> {
 
             if (_isRecording) ...[
               const SizedBox(height: 24),
-              const Text("🎹 Play your instrument and match the sequence rhythm targets:",
+              const Text("🎹 Simulated Instrument Inputs (Simulates incoming microphone Hz):",
                 textAlign: TextAlign.center, style: TextStyle(color: Colors.purpleAccent, fontWeight: FontWeight.bold, fontSize: 13)),
               const SizedBox(height: 12),
+
+              // 🎛️ SIMULATION PANEL: Sends exact or off-pitch frequencies into our processing engine
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: _targetPiece.map((note) {
-                  final bool isCurrentTarget = _currentTargetIndex < _targetPiece.length && _targetPiece[_currentTargetIndex] == note;
-                  return ElevatedButton(
-                    onPressed: !_isRecorderReady ? null : () => _processNoteHit(note),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: isCurrentTarget ? Colors.deepPurple[700] : Colors.grey[850],
-                      side: isCurrentTarget ? const BorderSide(color: Colors.purpleAccent, width: 1.5) : null,
-                      padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                    ),
-                    child: Text(note, style: TextStyle(color: isCurrentTarget ? Colors.white : Colors.white70, fontWeight: FontWeight.bold, fontSize: 15)),
-                  );
-                }).toList(),
+                children: [
+                  ElevatedButton(
+                    onPressed: () => _handleIncomingAcousticPitch(261.63), // Clean C4
+                    child: const Text("Play C4"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _handleIncomingAcousticPitch(329.63), // Clean E4
+                    child: const Text("Play E4"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _handleIncomingAcousticPitch(392.00), // Clean G4
+                    child: const Text("Play G4"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _handleIncomingAcousticPitch(523.25), // Clean C5
+                    child: const Text("Play C5"),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => _handleIncomingAcousticPitch(110.00), // Background hum / A2 note
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.amber[900]),
+                    child: const Text("Simulate BG Noise (110Hz)"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _handleIncomingAcousticPitch(264.00), // Slightly sharp C4 (+2.37Hz)
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.blueGrey[800]),
+                    child: const Text("Play Sharp C4"),
+                  ),
+                ],
               ),
             ],
 
@@ -357,7 +423,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
                         Container(
                           padding: const EdgeInsets.all(14),
                           decoration: BoxDecoration(color: const Color(0xFF161616), borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.purple.withOpacity(0.2))),
-                          child: Text(_aiFeedback, style: const TextStyle(fontStyle: FontStyle.italic, height: 1.4, color: Colors.white70)), // Fixed palette here
+                          child: Text(_aiFeedback, style: const TextStyle(fontStyle: FontStyle.italic, height: 1.4, color: Colors.white70)),
                         ),
                       ],
                     ),
