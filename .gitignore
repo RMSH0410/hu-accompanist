@@ -1,0 +1,18 @@
+# ─── BACKEND ENVIRONMENT VARIABLES ───
+backend/.env
+backend/.env.*
+backend/__pycache__/
+backend/*.pyc
+
+# ─── MAC/OS DISK JUNK ───
+.DS_Store
+.directory
+
+# ─── PYTHON VIRTUAL ENVIRONMENTS ───
+backend/venv/
+backend/env/
+
+# ─── FLUTTER BUILD JUNK (IF NOT CAUGHT BY FRONTEND/.GITIGNORE) ───
+frontend/.dart_tool/
+frontend/.packages
+frontend/build/

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="online_accompanist_frontend">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>online_accompanist_frontend</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <!--
+    You can customize the "flutter_bootstrap.js" script.
+    This is useful to provide a custom configuration to the Flutter loader
+    or to give the user feedback during the initialization process.
+
+    For more details:
+    * https://docs.flutter.dev/platform-integration/web/initialization
+  -->
+  <script src="flutter_bootstrap.js" async></script>
+  <script>
+  let audioContext;
+  let analyser;
+  let source;
+  let stream;
+
+  window.startWebPitchTracking = async function() {
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      analyser = audioContext.createAnalyser();
+      analyser.fftSize = 2048;
+      source = audioContext.createMediaStreamSource(stream);
+      source.connect(analyser);
+      return true;
+    } catch (e) {
+      console.error("Web Audio missing:", e);
+      return false;
+    }
+  };
+
+  window.getLiveWebFrequency = function() {
+    if (!analyser) return 0.0;
+    let bufferLength = analyser.frequencyBinCount;
+    let dataArray = new Float32Array(bufferLength);
+    analyser.getFloatTimeDomainData(dataArray);
+
+    // Simple AutoCorrelation Pitch Detection algorithm
+    let size = dataArray.length;
+    let r = new Float32Array(size);
+    for (let i = 0; i < size; i++) {
+      for (let j = 0; j < size - i; j++) {
+        r[i] += dataArray[j] * dataArray[j + i];
+      }
+    }
+    let d = 0; while (r[d] > r[d+1]) d++;
+    let maxval = -1, maxpos = -1;
+    for (let i = d; i < size / 2; i++) {
+      if (r[i] > maxval && r[i] > r[i-1] && r[i] > r[i+1]) {
+        maxval = r[i];
+        maxpos = i;
+      }
+    }
+    if (maxpos !== -1) {
+      let pitch = audioContext.sampleRate / maxpos;
+      if (pitch > 50 && pitch < 2000) return pitch;
+    }
+    return 0.0;
+  };
+
+  window.stopWebPitchTracking = function() {
+    if (stream) {
+      stream.getTracks().forEach(track => track.stop());
+    }
+    if (audioContext) {
+      audioContext.close();
+    }
+  };
+  </script>
+</body>
+</html>
