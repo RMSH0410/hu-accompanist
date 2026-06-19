@@ -8,10 +8,11 @@ Contribuation:
 
 Ramus:
 * Languages: Python, SQL
+* Responsibilities: AI Assistant, database (SQL and NoSQL), handling user requests from frontend (regarding AI and database stuff)
 
 Kingsley:
 * Languages: Golang (maybe), Rust, Python (for prototyping)
+* Responsibilities: Music score re-rendering logic, handling user input from frontend, communicating with DB
 
-Both:
-* Frontend
-* Reviewing each
+Kelvin:
+* Languages: JS / TS, React, possibly Flutter
