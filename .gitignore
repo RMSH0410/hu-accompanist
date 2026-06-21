@@ -1,0 +1,52 @@
+# ==========================================
+# 1. Rust / Cargo (Ignores the debug/release build artifacts)
+# ==========================================
+# Cargo tracks builds in a directory named 'target' by default
+**/*.rs.bk
+**/target/
+
+# ==========================================
+# 2. Flutter & Dart (Ignores .dart_tool, .packages, etc.)
+# ==========================================
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+
+# If flutter_rust_bridge generates specific temporary files
+# add them here (e.g., bridge_generated.web.js)
+
+# ==========================================
+# 3. Python (For your backend-web folder)
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# ==========================================
+# 4. IDEs and System Dotfiles (The "dot files")
+# ==========================================
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# VS Code files
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# IntelliJ / Android Studio files
+.idea/
+*.iml
+*.iws
+
+# Local environment variables (secrets)
+.env
+.env.local
