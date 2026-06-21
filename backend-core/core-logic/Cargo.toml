@@ -1,0 +1,9 @@
+[package]
+name = "core-logic"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+cpal = "0.15"
+spectrum-analyzer = "1.5"
+pitch-detection = "0.3" 
