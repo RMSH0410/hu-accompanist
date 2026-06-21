@@ -20,12 +20,8 @@ build/
 # ==========================================
 # 3. Python (For your backend-web folder)
 # ==========================================
-__pycache__/
-*.py[cod]
-*$py.class
-.venv/
-venv/
-ENV/
+**/.venv/
+backend-web/.env
 
 # ==========================================
 # 4. IDEs and System Dotfiles (The "dot files")
