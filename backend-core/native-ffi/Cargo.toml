@@ -7,4 +7,6 @@ edition = "2024"
 crate-type = ["cdylib", "staticlib"] # Required for Flutter FFI compilation
 
 [dependencies]
-core_logic = { path = "../core-logic" }
+cpal = "0.15"
+core-logic = { path = "../core-logic" }
+once_cell = "1.21.4"
