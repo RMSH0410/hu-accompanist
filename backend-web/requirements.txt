@@ -1,3 +1,7 @@
 google-genai
 python-dotenv
 django
+pdfplumber
+PyMuPDF
+opencv-python-headless
+pytesseract
