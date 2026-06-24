@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'DraggableRecorderButton.dart';
 
 void main() {
   runApp(const HuAccumponistApp());
@@ -30,27 +31,27 @@ class ScoreViewerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Edge-to-edge canvas layout
       body: SafeArea(
+        // Using Stack at the root allows your components to float perfectly over each other
         child: Stack(
           children: [
-            // 1. THE PDF VIEWER (Placeholder)
-            // Note: Horizontal scrolling is usually preferred for sheet music
-            SfPdfViewer.asset(
-              'assets/placeholder_score.pdf',
-              canShowScrollHead: false, 
-              pageLayoutMode: PdfPageLayoutMode.single, 
-              scrollDirection: PdfScrollDirection.horizontal, 
+            // LAYER 1: The Interactive PDF Viewer (Kept entirely on its own background layer)
+            Positioned.fill(
+              child: SfPdfViewer.asset(
+                'assets/placeholder_score.pdf',
+                canShowScrollHead: false,
+                pageLayoutMode: PdfPageLayoutMode.single,
+                scrollDirection: PdfScrollDirection.horizontal,
+              ),
             ),
 
-            // 2. FLOATING TOOLBAR (iPad-style)
+            // LAYER 2: Floating iPad-style Toolbar
             Positioned(
               top: 16,
               right: 16,
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  // Using the updated .withValues(alpha: x) syntax
                   color: const Color(0xFF16213E).withValues(alpha: 0.85),
                   borderRadius: BorderRadius.circular(30),
                   border: Border.all(
@@ -63,20 +64,28 @@ class ScoreViewerPage extends StatelessWidget {
                     IconButton(
                       icon: const Icon(Icons.edit_outlined, size: 22),
                       color: Colors.white,
-                      onPressed: () {
-                        // TODO: Toggle drawing tools
-                      },
+                      onPressed: () {},
                     ),
                     IconButton(
                       icon: const Icon(Icons.more_horiz, size: 22),
                       color: Colors.white,
-                      onPressed: () {
-                        // TODO: Open menu
-                      },
+                      onPressed: () {},
                     ),
                   ],
                 ),
               ),
+            ),
+
+            // LAYER 3: The Draggable Recorder Button
+            // Placing it at the very bottom of the Stack ensures its rendering order stays on top.
+            DraggableRecorderButton(
+              onToggle: (isRecording) {
+                if (isRecording) {
+                  print('▶ started — call your Rust backend here');
+                } else {
+                  print('■ stopped — call your Rust backend here');
+                }
+              },
             ),
           ],
         ),
