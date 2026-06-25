@@ -16,3 +16,6 @@ Concerns about rubato:
 Check if the tempo is decreasing / increasing in sequence
 
 Next step: learn reinforcement learning
+
+
+Testing music: Accolay Concerto one in a minor
