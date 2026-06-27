@@ -9,7 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  syncfusion_flutter_pdfviewer: ^24.1.41
+  syncfusion_flutter_pdfviewer: ^33.2.15
+  device_info_plus: ^13.2.0
 
 dev_dependencies:
   flutter_test:
@@ -20,3 +21,5 @@ flutter:
   uses-material-design: true
   assets:
     - assets/placeholder_score.pdf
+  
+
