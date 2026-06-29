@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'DraggableRecorderButton.dart';
-import 'DrawingOverlay.dart';         
+import 'DrawingOverlay.dart';
 import 'dart:ffi' as ffi;
 
 typedef StartRecordingFunc = ffi.Void Function();
@@ -9,22 +9,53 @@ typedef StartRecordingFuncDart = void Function();
 typedef StopRecordingFunc = ffi.Void Function();
 typedef StopRecordingFuncDart = void Function();
 
+// ─── Safe no-op stubs used when native symbols are unavailable ───────────────
+void _stubStart() => debugPrint('NativeBridge: start_recording stub (symbols not linked yet)');
+void _stubStop()  => debugPrint('NativeBridge: stop_recording stub (symbols not linked yet)');
+
 class NativeBridge {
-  late final ffi.DynamicLibrary _nativeLib;
-  late final StartRecordingFuncDart _startRecording;
-  late final StopRecordingFuncDart _stopRecording;
+  // Nullable so we know whether real lookup succeeded
+  ffi.DynamicLibrary? _nativeLib;
+
+  // Always callable — fall back to stubs if lookup failed
+  StartRecordingFuncDart _startRecording = _stubStart;
+  StopRecordingFuncDart  _stopRecording  = _stubStop;
+
+  bool get isNativeAvailable => _nativeLib != null;
 
   NativeBridge() {
-    _nativeLib = ffi.DynamicLibrary.executable();
-    _startRecording = _nativeLib
-        .lookup<ffi.NativeFunction<StartRecordingFunc>>('start_recording')
-        .asFunction();
-    _stopRecording = _nativeLib
-        .lookup<ffi.NativeFunction<StopRecordingFunc>>('stop_recording')
-        .asFunction();
+    // All lookup work is inside try/catch so a missing symbol
+    // can NEVER reach main() and block the UI from rendering.
+    try {
+      final lib = ffi.DynamicLibrary.executable();
+
+      _startRecording = lib
+          .lookup<ffi.NativeFunction<StartRecordingFunc>>('start_recording')
+          .asFunction();
+
+      _stopRecording = lib
+          .lookup<ffi.NativeFunction<StopRecordingFunc>>('stop_recording')
+          .asFunction();
+
+      _nativeLib = lib; // only set AFTER both lookups succeed
+      debugPrint('NativeBridge: native symbols linked successfully.');
+    } on ArgumentError catch (e) {
+      // Symbol not found — app keeps running with stubs
+      debugPrint('NativeBridge: symbol lookup failed — $e');
+      debugPrint('NativeBridge: running with no-op stubs. '
+          'Make sure start_recording / stop_recording are compiled '
+          'into the iOS Runner target with external "C" linkage.');
+    } catch (e) {
+      debugPrint('NativeBridge: unexpected init error — $e');
+    }
   }
+
+  // Public API — callers never touch private fields directly
+  void startRecording() => _startRecording();
+  void stopRecording()  => _stopRecording();
 }
 
+// Single shared instance — safe because constructor never throws now
 final NativeBridge _nativeBridge = NativeBridge();
 
 void main() {
@@ -48,7 +79,6 @@ class HuAccumponistApp extends StatelessWidget {
   }
 }
 
-// ↓ Changed to StatefulWidget to track drawing mode
 class ScoreViewerPage extends StatefulWidget {
   const ScoreViewerPage({super.key});
 
@@ -75,7 +105,7 @@ class _ScoreViewerPageState extends State<ScoreViewerPage> {
               ),
             ),
 
-            // LAYER 2: Drawing overlay (transparent when not drawing)
+            // LAYER 2: Drawing overlay
             DrawingOverlay(isDrawingMode: _isDrawingMode),
 
             // LAYER 3: Floating Toolbar
@@ -92,7 +122,6 @@ class _ScoreViewerPageState extends State<ScoreViewerPage> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Pen button — highlights red when active
                     IconButton(
                       icon: Icon(
                         Icons.edit_outlined,
@@ -101,9 +130,8 @@ class _ScoreViewerPageState extends State<ScoreViewerPage> {
                             ? const Color(0xFFE94560)
                             : Colors.white,
                       ),
-                      onPressed: () {
-                        setState(() => _isDrawingMode = !_isDrawingMode);
-                      },
+                      onPressed: () =>
+                          setState(() => _isDrawingMode = !_isDrawingMode),
                     ),
                     IconButton(
                       icon: const Icon(Icons.more_horiz, size: 22),
@@ -116,12 +144,13 @@ class _ScoreViewerPageState extends State<ScoreViewerPage> {
             ),
 
             // LAYER 4: Draggable Recorder Button
+            // Uses public methods — no private field access across class boundary
             DraggableRecorderButton(
               onToggle: (isRecording) {
                 if (isRecording) {
-                  _nativeBridge._startRecording();
+                  _nativeBridge.startRecording();
                 } else {
-                  _nativeBridge._stopRecording();
+                  _nativeBridge.stopRecording();
                 }
               },
             ),

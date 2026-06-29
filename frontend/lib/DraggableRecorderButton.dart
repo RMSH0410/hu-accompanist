@@ -105,7 +105,7 @@ class _DraggableRecorderButtonState extends State<DraggableRecorderButton>
             const SizedBox(height: 12),
             AnimatedBuilder(
               animation: _pulseAnim,
-              builder: (_, __) => SizedBox(
+              builder: (_, _) => SizedBox(
                 width: 100,
                 height: 100,
                 child: Stack(

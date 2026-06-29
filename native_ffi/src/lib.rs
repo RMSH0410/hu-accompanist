@@ -1,6 +1,9 @@
-use std::sync::Mutex;
-use once_cell::sync::Lazy;
 use cpal::Stream;
+use once_cell::sync::Lazy;
+use std::sync::Mutex;
+pub mod audio;
+pub mod dsp;
+pub mod run_onnx;
 
 pub struct SendStream(pub Stream);
 
@@ -15,9 +18,10 @@ pub extern "C" fn listen_audio() {
         return;
     }
     let (tx, rx) = std::sync::mpsc::channel::<Vec<f32>>();
-    let _my_live_stream  : Result<Stream, Box<dyn std::error::Error>> = core_logic::audio::create_stream(tx);
+    let _my_live_stream: Result<Stream, Box<dyn std::error::Error>> =
+        audio::create_stream(tx);
     std::thread::spawn(move || {
-        core_logic::audio::start_processing_loop(rx);
+        audio::start_processing_loop(rx);
     });
     if let Ok(stream) = _my_live_stream {
         *stream_guard = Some(SendStream(stream));

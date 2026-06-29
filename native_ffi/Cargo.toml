@@ -1,10 +1,15 @@
 [package]
-name = "core-logic"
+name = "native_ffi"
 version = "0.1.0"
 edition = "2024"
 
+[lib]
+crate-type = ["cdylib", "staticlib"] # Required for Flutter FFI compilation
+
 [dependencies]
+once_cell = "1.20"
 cpal = "0.15"
 spectrum-analyzer = "1.5"
 pitch-detection = "0.3" 
 realfft = "3.4"
+rubato = "3.0.0"
