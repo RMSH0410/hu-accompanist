@@ -19,3 +19,6 @@ Next step: learn reinforcement learning
 
 
 Testing music: Accolay Concerto one in a minor
+
+
+Get the machine learning out of here we are just random high school student who vibecode the entire project...
