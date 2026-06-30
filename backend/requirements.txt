@@ -5,3 +5,4 @@ pdfplumber
 PyMuPDF
 opencv-python-headless
 pytesseract
+music21
