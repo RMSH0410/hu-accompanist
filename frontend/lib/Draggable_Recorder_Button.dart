@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-class DraggableRecorderButton extends StatefulWidget {
+class Draggable_Recorder_Button extends StatefulWidget {
   final void Function(bool isRecording) onToggle;
 
-  const DraggableRecorderButton({super.key, required this.onToggle});
+  const Draggable_Recorder_Button({super.key, required this.onToggle});
 
   @override
-  State<DraggableRecorderButton> createState() => _DraggableRecorderButtonState();
+  State<Draggable_Recorder_Button> createState() => _Draggable_Recorder_ButtonState();
 }
 
-class _DraggableRecorderButtonState extends State<DraggableRecorderButton>
+class _Draggable_Recorder_ButtonState extends State<Draggable_Recorder_Button>
     with SingleTickerProviderStateMixin {
   bool _isRecording = false;
   Duration _elapsed = Duration.zero;

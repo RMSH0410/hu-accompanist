@@ -25,14 +25,14 @@ final List<MusicSheet?> _slots = List.generate(12, (_) => null);
 // PAGE
 // ═══════════════════════════════════════════════════════════════════════════════
 
-class MusicLibraryPage extends StatefulWidget {
-  const MusicLibraryPage({super.key});
+class Music_Library_Page extends StatefulWidget {
+  const Music_Library_Page({super.key});
 
   @override
-  State<MusicLibraryPage> createState() => _MusicLibraryPageState();
+  State<Music_Library_Page> createState() => _Music_Library_PageState();
 }
 
-class _MusicLibraryPageState extends State<MusicLibraryPage> {
+class _Music_Library_PageState extends State<Music_Library_Page> {
   final TextEditingController _search = TextEditingController();
   final FocusNode _focus = FocusNode();
   bool _focused = false;

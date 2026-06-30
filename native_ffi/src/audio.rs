@@ -1,20 +1,8 @@
 use cpal::Stream;
 use cpal::traits::{DeviceTrait, HostTrait, StreamTrait};
-use realfft::RealFftPlanner;
 use std::sync::mpsc::Receiver;
 use std::sync::mpsc::Sender;
 use std::ops::Range;
-
-pub enum Instrument {
-    Violin,
-    Piano
-}
-
-pub struct InstrumentProfile {
-    pub instrument_type : Instrument,
-    pub freq_rng : Range<f32>,
-    pub chords : bool
-}
 
 pub fn create_stream(tx: Sender<Vec<f32>>) -> Result<Stream, Box<dyn std::error::Error>> {
     let host = cpal::default_host();
@@ -60,9 +48,10 @@ pub fn start_processing_loop(rx: Receiver<Vec<f32>>) {
             .sum::<f32>()           // 2. Add them all together
             / 1024.0)               // 3. Divide by 1024 (Mean)
             .sqrt();
-           if rms >= 0.005 {
-
+           if rms <= 0.005 {
+                continue;
            }
+
            audio_vault.drain(0..128);
        }
     }

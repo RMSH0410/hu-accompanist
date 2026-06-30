@@ -1,27 +1,15 @@
 PODS:
-  - device_info_plus (0.0.1):
-    - FlutterMacOS
   - FlutterMacOS (1.0.0)
-  - syncfusion_pdfviewer_macos (0.0.1):
-    - FlutterMacOS
 
 DEPENDENCIES:
-  - device_info_plus (from `Flutter/ephemeral/.symlinks/plugins/device_info_plus/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
-  - syncfusion_pdfviewer_macos (from `Flutter/ephemeral/.symlinks/plugins/syncfusion_pdfviewer_macos/macos`)
 
 EXTERNAL SOURCES:
-  device_info_plus:
-    :path: Flutter/ephemeral/.symlinks/plugins/device_info_plus/macos
   FlutterMacOS:
     :path: Flutter/ephemeral
-  syncfusion_pdfviewer_macos:
-    :path: Flutter/ephemeral/.symlinks/plugins/syncfusion_pdfviewer_macos/macos
 
 SPEC CHECKSUMS:
-  device_info_plus: b0fafc687fb901e2af612763340f1b0d4352f8e5
   FlutterMacOS: d0db08ddef1a9af05a5ec4b724367152bb0500b1
-  syncfusion_pdfviewer_macos: 94d2eafcb3475d32309d4ba282ef02dc75fd682f
 
 PODFILE CHECKSUM: 54d867c82ac51cbd61b565781b9fada492027009
 

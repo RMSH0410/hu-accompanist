@@ -1,8 +1,10 @@
 use realfft::RealFftPlanner;
-use std::sync::{OnceLock, Arc};
+use std::sync::{LazyLock, Mutex};
 
 const LEN: usize = 2048;
-static FFT_PLANNER: OnceLock<Arc<dyn realfft::Fft>> = OnceLock::new();
+static FFT_PLANNER: LazyLock<Mutex<RealFftPlanner::<f32>>> = LazyLock::new(|| {
+    Mutex::new(RealFftPlanner::new())
+});
 
 pub fn get_fft_instance() -> Arc<dyn realfft::Fft> {
     FFT_PLANNER

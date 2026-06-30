@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-import 'DraggableRecorderButton.dart';
-import 'DrawingOverlay.dart';
+import 'Draggable_Recorder_Button.dart';
+import 'Drawing_Overlay.dart';
+import 'Music_Library_Page.dart';
 import 'dart:ffi' as ffi;
 
 typedef StartRecordingFunc = ffi.Void Function();
@@ -89,6 +90,27 @@ class ScoreViewerPage extends StatefulWidget {
 class _ScoreViewerPageState extends State<ScoreViewerPage> {
   bool _isDrawingMode = false;
 
+  // ✅ Add this method to the state class
+  void _goToNavPage() {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        transitionDuration: const Duration(milliseconds: 400),
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const Music_Library_Page(), // 👈 replace with your class name
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          final tween = Tween(
+            begin: const Offset(0.0, 1.0),
+            end: Offset.zero,
+          ).chain(CurveTween(curve: Curves.easeOutCubic));
+          return SlideTransition(
+            position: animation.drive(tween),
+            child: child,
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,17 +118,23 @@ class _ScoreViewerPageState extends State<ScoreViewerPage> {
         child: Stack(
           children: [
             // LAYER 1: PDF Viewer
-            Positioned.fill(
-              child: SfPdfViewer.asset(
-                'assets/placeholder_score.pdf',
-                canShowScrollHead: false,
-                pageLayoutMode: PdfPageLayoutMode.single,
-                scrollDirection: PdfScrollDirection.horizontal,
-              ),
-            ),
+            // LAYER 1: temp replacement
+                Positioned.fill(
+                  child: Container(color: Colors.red),
+  ),
+            //Positioned.fill(
+              //child: SfPdfViewer.asset(
+               // 'assets/placeholder_score.pdf',
+               // canShowScrollHead: false,
+                //pageLayoutMode: PdfPageLayoutMode.single,
+               // scrollDirection: PdfScrollDirection.horizontal,
+              //),
+            //),
 
             // LAYER 2: Drawing overlay
-            DrawingOverlay(isDrawingMode: _isDrawingMode),
+            Positioned.fill(
+              child: Drawing_Overlay(isDrawingMode: _isDrawingMode),
+            ),
 
             // LAYER 3: Floating Toolbar
             Positioned(
@@ -144,8 +172,7 @@ class _ScoreViewerPageState extends State<ScoreViewerPage> {
             ),
 
             // LAYER 4: Draggable Recorder Button
-            // Uses public methods — no private field access across class boundary
-            DraggableRecorderButton(
+            Draggable_Recorder_Button(
               onToggle: (isRecording) {
                 if (isRecording) {
                   _nativeBridge.startRecording();
@@ -154,7 +181,25 @@ class _ScoreViewerPageState extends State<ScoreViewerPage> {
                 }
               },
             ),
-          ],
+
+            // ✅ LAYER 5: Nav Button — now INSIDE children: [ ]
+            Positioned(
+              bottom: 32,
+              left: 16,
+              child: GestureDetector(
+                onTap: _goToNavPage,
+                child: Container(
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE94560),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: const Icon(Icons.menu, color: Colors.white),
+                ),
+              ),
+            ),
+
+          ], // ✅ children closes HERE, after all 5 layers
         ),
       ),
     );
