@@ -3,1680 +3,1680 @@
     "hz": 65.406,
     "start": 0.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 130.813,
     "start": 0.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 195.998,
     "start": 0.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 261.626,
     "start": 0.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 391.995,
     "start": 0.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 43.654,
     "start": 0.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 87.307,
     "start": 0.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 207.652,
     "start": 0.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 261.626,
     "start": 0.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 311.127,
     "start": 0.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 415.305,
     "start": 0.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 48.999,
     "start": 1.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 97.999,
     "start": 1.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 195.998,
     "start": 1.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 246.942,
     "start": 1.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 293.665,
     "start": 1.0,
     "duration": 0.75,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 391.995,
     "start": 1.0,
     "duration": 0.75,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 293.665,
     "start": 1.5,
     "duration": 0.25,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 349.228,
     "start": 1.5,
     "duration": 0.25,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 65.406,
     "start": 1.75,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 97.999,
     "start": 1.75,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 130.813,
     "start": 1.75,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 155.563,
     "start": 1.75,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 195.998,
     "start": 1.75,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 261.626,
     "start": 1.75,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 311.127,
     "start": 1.75,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 51.913,
     "start": 3.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 103.826,
     "start": 3.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 155.563,
     "start": 3.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 207.652,
     "start": 3.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 261.626,
     "start": 3.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 311.127,
     "start": 3.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 34.648,
     "start": 4.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 69.296,
     "start": 4.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 174.614,
     "start": 4.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 207.652,
     "start": 4.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 293.665,
     "start": 4.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 349.228,
     "start": 4.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 38.891,
     "start": 4.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 77.782,
     "start": 4.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 155.563,
     "start": 4.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 195.998,
     "start": 4.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 261.626,
     "start": 4.5,
     "duration": 0.75,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 311.127,
     "start": 4.5,
     "duration": 0.75,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 233.082,
     "start": 5.0,
     "duration": 0.25,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 277.183,
     "start": 5.0,
     "duration": 0.25,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 51.913,
     "start": 5.25,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 103.826,
     "start": 5.25,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 130.813,
     "start": 5.25,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 155.563,
     "start": 5.25,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 207.652,
     "start": 5.25,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 261.626,
     "start": 5.25,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 48.999,
     "start": 7.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 97.999,
     "start": 7.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 146.832,
     "start": 7.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 174.614,
     "start": 7.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 246.942,
     "start": 7.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 293.665,
     "start": 7.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 246.942,
     "start": 7.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 32.703,
     "start": 8.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 65.406,
     "start": 8.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 155.563,
     "start": 8.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 195.998,
     "start": 8.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 311.127,
     "start": 8.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 43.654,
     "start": 8.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 87.307,
     "start": 8.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 207.652,
     "start": 8.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 261.626,
     "start": 8.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 391.995,
     "start": 8.5,
     "duration": 0.375,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 349.228,
     "start": 8.875,
     "duration": 0.125,
-    "dynamic": 0.6
+    "dynamic": 0.899
   },
   {
     "hz": 65.406,
     "start": 9.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.92
   },
   {
     "hz": 130.813,
     "start": 9.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.92
   },
   {
     "hz": 195.998,
     "start": 9.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.92
   },
   {
     "hz": 261.626,
     "start": 9.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.92
   },
   {
     "hz": 311.127,
     "start": 9.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.92
   },
   {
     "hz": 261.626,
     "start": 9.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 73.416,
     "start": 10.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 110.0,
     "start": 10.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 146.832,
     "start": 10.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 174.614,
     "start": 10.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 293.665,
     "start": 10.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 48.999,
     "start": 10.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 97.999,
     "start": 10.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 195.998,
     "start": 10.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 246.942,
     "start": 10.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 293.665,
     "start": 10.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 391.995,
     "start": 10.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 36.708,
     "start": 11.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 73.416,
     "start": 11.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 293.665,
     "start": 11.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 349.228,
     "start": 11.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 493.883,
     "start": 11.0,
     "duration": 0.375,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 440.0,
     "start": 11.375,
     "duration": 0.125,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 48.999,
     "start": 11.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 97.999,
     "start": 11.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 246.942,
     "start": 11.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 293.665,
     "start": 11.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 391.995,
     "start": 11.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.88
   },
   {
     "hz": 65.406,
     "start": 12.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 130.813,
     "start": 12.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 311.127,
     "start": 12.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 391.995,
     "start": 12.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 622.254,
     "start": 12.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 130.813,
     "start": 12.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 293.665,
     "start": 12.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 311.127,
     "start": 12.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 415.305,
     "start": 12.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 622.254,
     "start": 12.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 123.471,
     "start": 13.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 246.942,
     "start": 13.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 293.665,
     "start": 13.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 587.33,
     "start": 13.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 415.305,
     "start": 13.5,
     "duration": 0.375,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 369.994,
     "start": 13.875,
     "duration": 0.125,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 123.471,
     "start": 14.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 233.082,
     "start": 14.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 293.665,
     "start": 14.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 391.995,
     "start": 14.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 587.33,
     "start": 14.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 110.0,
     "start": 15.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 220.0,
     "start": 15.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 261.626,
     "start": 15.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 391.995,
     "start": 15.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 523.251,
     "start": 15.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 103.826,
     "start": 16.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 207.652,
     "start": 16.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 261.626,
     "start": 16.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 293.665,
     "start": 16.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 369.994,
     "start": 16.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 587.33,
     "start": 16.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 97.999,
     "start": 16.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 195.998,
     "start": 16.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 293.665,
     "start": 16.5,
     "duration": 0.375,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 391.995,
     "start": 16.5,
     "duration": 0.375,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 493.883,
     "start": 16.5,
     "duration": 0.375,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 261.626,
     "start": 16.875,
     "duration": 0.125,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 440.0,
     "start": 16.875,
     "duration": 0.125,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 92.499,
     "start": 17.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 184.997,
     "start": 17.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 246.942,
     "start": 17.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 293.665,
     "start": 17.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 391.995,
     "start": 17.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 77.782,
     "start": 17.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 155.563,
     "start": 17.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 261.626,
     "start": 17.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 391.995,
     "start": 17.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 523.251,
     "start": 17.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 87.307,
     "start": 18.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 174.614,
     "start": 18.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 207.652,
     "start": 18.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 261.626,
     "start": 18.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 415.305,
     "start": 18.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 61.735,
     "start": 18.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 123.471,
     "start": 18.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 195.998,
     "start": 18.5,
     "duration": 0.75,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 293.665,
     "start": 18.5,
     "duration": 0.75,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 391.995,
     "start": 18.5,
     "duration": 0.375,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 349.228,
     "start": 18.875,
     "duration": 0.125,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 65.406,
     "start": 19.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 130.813,
     "start": 19.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 195.998,
     "start": 19.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 261.626,
     "start": 19.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 311.127,
     "start": 19.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 51.913,
     "start": 19.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 103.826,
     "start": 19.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 155.563,
     "start": 19.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 207.652,
     "start": 19.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 261.626,
     "start": 19.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 311.127,
     "start": 19.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 34.648,
     "start": 20.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 69.296,
     "start": 20.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 174.614,
     "start": 20.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 207.652,
     "start": 20.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 277.183,
     "start": 20.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 349.228,
     "start": 20.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 48.999,
     "start": 20.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 97.999,
     "start": 20.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 174.614,
     "start": 20.5,
     "duration": 0.375,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 195.998,
     "start": 20.5,
     "duration": 0.375,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 233.082,
     "start": 20.5,
     "duration": 0.375,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 311.127,
     "start": 20.5,
     "duration": 0.375,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 293.665,
     "start": 20.875,
     "duration": 0.125,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 32.703,
     "start": 21.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 65.406,
     "start": 21.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 155.563,
     "start": 21.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 195.998,
     "start": 21.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 261.626,
     "start": 21.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 65.406,
     "start": 21.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 130.813,
     "start": 21.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 311.127,
     "start": 21.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 391.995,
     "start": 21.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 622.254,
     "start": 21.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 130.813,
     "start": 22.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 261.626,
     "start": 22.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 311.127,
     "start": 22.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 415.305,
     "start": 22.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 622.254,
     "start": 22.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 123.471,
     "start": 22.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 246.942,
     "start": 22.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 293.665,
     "start": 22.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 587.33,
     "start": 22.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 415.305,
     "start": 23.0,
     "duration": 0.375,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 369.994,
     "start": 23.375,
     "duration": 0.125,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 123.471,
     "start": 23.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 233.082,
     "start": 23.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 293.665,
     "start": 23.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 391.995,
     "start": 23.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 587.33,
     "start": 23.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 110.0,
     "start": 25.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 220.0,
     "start": 25.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 261.626,
     "start": 25.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 391.995,
     "start": 25.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 523.251,
     "start": 25.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 110.0,
     "start": 25.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 207.652,
     "start": 25.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 261.626,
     "start": 25.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 369.994,
     "start": 25.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 587.33,
     "start": 25.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 293.665,
     "start": 26.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 97.999,
     "start": 26.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 195.998,
     "start": 26.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 293.665,
     "start": 26.5,
     "duration": 0.375,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 391.995,
     "start": 26.5,
     "duration": 0.375,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 493.883,
     "start": 26.5,
     "duration": 0.375,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 261.626,
     "start": 26.875,
     "duration": 0.125,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 440.0,
     "start": 26.875,
     "duration": 0.125,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 92.499,
     "start": 27.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 184.997,
     "start": 27.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 246.942,
     "start": 27.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 293.665,
     "start": 27.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 391.995,
     "start": 27.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 77.782,
     "start": 28.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 155.563,
     "start": 28.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 261.626,
     "start": 28.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 391.995,
     "start": 28.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 523.251,
     "start": 28.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 87.307,
     "start": 28.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.711
   },
   {
     "hz": 174.614,
     "start": 28.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.711
   },
   {
     "hz": 207.652,
     "start": 28.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.711
   },
   {
     "hz": 261.626,
     "start": 28.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.711
   },
   {
     "hz": 415.305,
     "start": 28.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.711
   },
   {
     "hz": 61.735,
     "start": 29.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.617
   },
   {
     "hz": 123.471,
     "start": 29.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.617
   },
   {
     "hz": 195.998,
     "start": 29.0,
     "duration": 0.75,
-    "dynamic": 0.6
+    "dynamic": 0.617
   },
   {
     "hz": 293.665,
     "start": 29.0,
     "duration": 0.75,
-    "dynamic": 0.6
+    "dynamic": 0.617
   },
   {
     "hz": 391.995,
     "start": 29.0,
     "duration": 0.375,
-    "dynamic": 0.6
+    "dynamic": 0.617
   },
   {
     "hz": 349.228,
     "start": 29.375,
     "duration": 0.125,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 65.406,
     "start": 29.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 130.813,
     "start": 29.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 207.652,
     "start": 29.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 311.127,
     "start": 29.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 51.913,
     "start": 30.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 103.826,
     "start": 30.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 155.563,
     "start": 30.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 207.652,
     "start": 30.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 277.183,
     "start": 30.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 311.127,
     "start": 30.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 34.648,
     "start": 30.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 69.296,
     "start": 30.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 174.614,
     "start": 30.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 207.652,
     "start": 30.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 277.183,
     "start": 30.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 349.228,
     "start": 30.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 48.999,
     "start": 31.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 97.999,
     "start": 31.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 174.614,
     "start": 31.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 195.998,
     "start": 31.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 233.082,
     "start": 31.0,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 311.127,
     "start": 31.0,
     "duration": 0.375,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 293.665,
     "start": 31.375,
     "duration": 0.125,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 34.648,
     "start": 31.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 69.296,
     "start": 31.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 155.563,
     "start": 31.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 195.998,
     "start": 31.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 277.183,
     "start": 31.5,
     "duration": 0.5,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 130.813,
     "start": 32.0,
     "duration": 2.0,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 195.998,
     "start": 32.0,
     "duration": 2.0,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 311.127,
     "start": 32.0,
     "duration": 2.0,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 391.995,
     "start": 32.0,
     "duration": 2.0,
-    "dynamic": 0.6
+    "dynamic": 0.75
   },
   {
     "hz": 523.251,
     "start": 32.0,
     "duration": 2.0,
-    "dynamic": 0.6
+    "dynamic": 0.75
   }
 ]
