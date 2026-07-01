@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:liquid_glass_easy/liquid_glass_easy.dart';
+import 'LiquidGlass.dart';
 
 // ─── Plug your real data in here later ────────────────────────────────────────
 class MusicSheet {
@@ -54,40 +56,60 @@ class _Music_Library_PageState extends State<Music_Library_Page> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.light,
+      // Dark status bar icons since the background is now light.
+      value: SystemUiOverlayStyle.dark,
       child: Scaffold(
-        // Deep iOS-dark background — almost black with a cool blue tint
-        backgroundColor: const Color(0xFF09090F),
+        backgroundColor: const Color.fromARGB(255, 236, 236, 236),
         body: SafeArea(
           bottom: false,
-          child: GestureDetector(
-            onTap: () => FocusScope.of(context).unfocus(),
-            behavior: HitTestBehavior.translucent,
-            child: Column(
-              children: [
-                // ── Search bar ──────────────────────────────────────────────
-                _SearchBar(
-                  controller: _search,
-                  focusNode: _focus,
-                  focused: _focused,
-                ),
-
-                // ── Grid ────────────────────────────────────────────────────
-                Expanded(
-                  child: GridView.builder(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 40),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 16,
-                      childAspectRatio: 0.68,
-                    ),
-                    itemCount: _slots.length,
-                    itemBuilder: (_, i) => _ParkingSlot(sheet: _slots[i]),
+          // LiquidGlassView gives the CloseButton's LiquidGlassLens something
+          // to refract on Skia backends (e.g. macOS desktop) instead of
+          // silently falling back to a flat frosted look. backgroundWidget
+          // is still rendered normally — it's just also captured for the lens.
+          child: LiquidGlassView(
+            backgroundWidget: Container(
+              color: const Color.fromARGB(255, 255, 255, 255),
+            ),
+            child: GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              behavior: HitTestBehavior.translucent,
+              child: Column(
+                children: [
+                  // ── Top row: close button + search bar ───────────────────────
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(left: 16, top: 24),
+                        child: CloseButton(),
+                      ),
+                      Expanded(
+                        child: _SearchBar(
+                          controller: _search,
+                          focusNode: _focus,
+                          focused: _focused,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
+
+                  // ── Grid ────────────────────────────────────────────────────
+                  Expanded(
+                    child: GridView.builder(
+                      padding: const EdgeInsets.fromLTRB(16, 8, 16, 40),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 12,
+                        mainAxisSpacing: 16,
+                        childAspectRatio: 0.68,
+                      ),
+                      itemCount: _slots.length,
+                      itemBuilder: (_, i) => _ParkingSlot(sheet: _slots[i]),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -97,7 +119,7 @@ class _Music_Library_PageState extends State<Music_Library_Page> {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// SEARCH BAR  — iOS-style frosted glass pill
+// SEARCH BAR  — light "frosted glass" pill
 // ═══════════════════════════════════════════════════════════════════════════════
 
 class _SearchBar extends StatelessWidget {
@@ -120,21 +142,21 @@ class _SearchBar extends StatelessWidget {
         curve: Curves.easeOut,
         height: 48,
         decoration: BoxDecoration(
-          // Liquid glass: layered white transparency + subtle border
+          // Glass: layered dark transparency over the light bg + subtle border
           color: focused
-              ? Colors.white.withValues(alpha: 0.13)
-              : Colors.white.withValues(alpha: 0.08),
+              ? Colors.black.withValues(alpha: 0.06)
+              : Colors.black.withValues(alpha: 0.035),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: focused
-                ? Colors.white.withValues(alpha: 0.28)
-                : Colors.white.withValues(alpha: 0.10),
+                ? Colors.black.withValues(alpha: 0.14)
+                : Colors.black.withValues(alpha: 0.08),
             width: 1,
           ),
           boxShadow: focused
               ? [
                   BoxShadow(
-                    color: Colors.white.withValues(alpha: 0.04),
+                    color: Colors.black.withValues(alpha: 0.04),
                     blurRadius: 20,
                     spreadRadius: 0,
                   ),
@@ -147,7 +169,7 @@ class _SearchBar extends StatelessWidget {
             Icon(
               Icons.search_rounded,
               size: 20,
-              color: Colors.white.withValues(alpha: focused ? 0.70 : 0.40),
+              color: Colors.black.withValues(alpha: focused ? 0.55 : 0.35),
             ),
             const SizedBox(width: 8),
             Expanded(
@@ -155,7 +177,7 @@ class _SearchBar extends StatelessWidget {
                 controller: controller,
                 focusNode: focusNode,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: Colors.black87,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                   letterSpacing: -0.2,
@@ -163,14 +185,14 @@ class _SearchBar extends StatelessWidget {
                 decoration: InputDecoration(
                   hintText: 'Search',
                   hintStyle: TextStyle(
-                    color: Colors.white.withValues(alpha: 0.30),
+                    color: Colors.black.withValues(alpha: 0.30),
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                   ),
                   border: InputBorder.none,
                   isDense: true,
                 ),
-                cursorColor: Colors.white,
+                cursorColor: Colors.black87,
                 cursorHeight: 18,
               ),
             ),
@@ -183,13 +205,42 @@ class _SearchBar extends StatelessWidget {
                   child: Icon(
                     Icons.cancel,
                     size: 17,
-                    color: Colors.white.withValues(alpha: 0.35),
+                    color: Colors.black.withValues(alpha: 0.30),
                   ),
                 ),
               )
             else
               const SizedBox(width: 14),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// Close page button — top-left corner, small and subtle
+// ═══════════════════════════════════════════════════════════════════════════════
+class CloseButton extends StatelessWidget {
+  const CloseButton({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Navigator.pop(context),
+      child: LiquidGlass(
+        borderRadius: BorderRadius.circular(16),
+        blur: 12,
+        tintOpacity: 0.22,
+        child: const SizedBox(
+          width: 32,
+          height: 32,
+          child: Center(
+            child: Icon(
+              Icons.close_rounded,
+              size: 18,
+              color: Color.fromARGB(255, 180, 180, 180),
+            ),
+          ),
         ),
       ),
     );
@@ -217,14 +268,14 @@ class _ParkingSlot extends StatelessWidget {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                // Glass surface — slightly lighter than the page bg
+                // Glass surface — a touch darker than the page bg
                 color: isEmpty
-                    ? Colors.white.withValues(alpha: 0.05)
-                    : Colors.white.withValues(alpha: 0.08),
+                    ? const Color.fromARGB(255, 180, 180, 180).withValues(alpha: 0.06)
+                    : const Color.fromARGB(255, 180, 180, 180).withValues(alpha: 0.10),
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(
-                  color: Colors.white.withValues(
-                    alpha: isEmpty ? 0.06 : 0.12,
+                  color: const Color.fromARGB(255, 180, 180, 180).withValues(
+                    alpha: isEmpty ? 0.18 : 0.28,
                   ),
                   width: 1,
                 ),
@@ -247,7 +298,7 @@ class _ParkingSlot extends StatelessWidget {
             Text(
               sheet!.title,
               style: const TextStyle(
-                color: Colors.white,
+                color: Color.fromARGB(255, 144, 144, 144),
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
                 letterSpacing: -0.2,
@@ -259,7 +310,7 @@ class _ParkingSlot extends StatelessWidget {
             Text(
               'Tap to open',
               style: TextStyle(
-                color: Colors.white.withValues(alpha: 0.35),
+                color: Colors.black.withValues(alpha: 0.40),
                 fontSize: 11,
               ),
             ),
@@ -294,7 +345,7 @@ class _DashedPagePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white.withValues(alpha: 0.14)
+      ..color = Colors.black.withValues(alpha: 0.22)
       ..strokeWidth = 1.2
       ..style = PaintingStyle.stroke;
 
@@ -325,7 +376,7 @@ class _DashedPagePainter extends CustomPainter {
 
     // Tiny dog-ear fold top-right corner
     final foldPaint = Paint()
-      ..color = Colors.white.withValues(alpha: 0.10)
+      ..color = Colors.black.withValues(alpha: 0.16)
       ..style = PaintingStyle.fill;
 
     final foldPath = Path()
@@ -337,7 +388,7 @@ class _DashedPagePainter extends CustomPainter {
 
     // Three faint lines to suggest text on the page
     final linePaint = Paint()
-      ..color = Colors.white.withValues(alpha: 0.10)
+      ..color = Colors.black.withValues(alpha: 0.16)
       ..strokeWidth = 1.0
       ..style = PaintingStyle.stroke;
 
@@ -369,7 +420,7 @@ class _FilledSlotContent extends StatelessWidget {
         child: Image.network(
           sheet.thumbnailUrl!,
           fit: BoxFit.cover,
-          errorBuilder: (_, __, ___) => _EmptySlotContent(),
+          errorBuilder: (_, _, _) => _EmptySlotContent(),
         ),
       );
     }
@@ -390,7 +441,7 @@ class _PlaceholderLine extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.08),
+        color: Colors.black.withValues(alpha: 0.07),
         borderRadius: BorderRadius.circular(6),
       ),
     );

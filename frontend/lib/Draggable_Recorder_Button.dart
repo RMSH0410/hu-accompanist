@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:liquid_glass_easy/liquid_glass_easy.dart';
 
 class Draggable_Recorder_Button extends StatefulWidget {
   final void Function(bool isRecording) onToggle;
@@ -94,7 +95,7 @@ class _Draggable_Recorder_ButtonState extends State<Draggable_Recorder_Button>
                 _isRecording ? _elapsedLabel : 'Tap to record',
                 key: ValueKey(_isRecording),
                 style: TextStyle(
-                  color: _isRecording ? _activeColor : Colors.white54,
+                  color: _isRecording ? const Color.fromARGB(255, 95, 95, 95) : const Color.fromARGB(137, 109, 109, 109),
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                   letterSpacing: 1.2,
@@ -128,8 +129,12 @@ class _Draggable_Recorder_ButtonState extends State<Draggable_Recorder_Button>
                       height: 64,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: color,
                         boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.22),
+                            blurRadius: 16,
+                            offset: const Offset(0, 6),
+                          ),
                           BoxShadow(
                             color: color.withValues(alpha: 0.45),
                             blurRadius: 20,
@@ -137,13 +142,29 @@ class _Draggable_Recorder_ButtonState extends State<Draggable_Recorder_Button>
                           ),
                         ],
                       ),
-                      child: AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 200),
-                        child: Icon(
-                          _isRecording ? Icons.stop_rounded : Icons.mic_rounded,
-                          key: ValueKey(_isRecording),
-                          color: Colors.white,
-                          size: 30,
+                      child: LiquidGlassLens(
+                        style: LiquidGlassStyle(
+                          shape: const LiquidGlassShape
+                              .continuousRoundedRectangle(cornerRadius: 32),
+                          appearance: LiquidGlassAppearance(
+                            color: color.withValues(alpha: 0.55),
+                          ),
+                          refraction: const LiquidGlassRefraction(
+                            distortion: 0.12,
+                            distortionWidth: 20,
+                            magnification: 1.05,
+                          ),
+                        ),
+                        child: Center(
+                          child: AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 200),
+                            child: Icon(
+                              _isRecording ? Icons.stop_rounded : Icons.mic_rounded,
+                              key: ValueKey(_isRecording),
+                              color: const Color.fromARGB(255, 110, 110, 110),
+                              size: 30,
+                            ),
+                          ),
                         ),
                       ),
                     ),

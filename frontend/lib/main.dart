@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'package:liquid_glass_easy/liquid_glass_easy.dart';
 import 'Draggable_Recorder_Button.dart';
 import 'Drawing_Overlay.dart';
 import 'Music_Library_Page.dart';
+import 'LiquidGlass.dart';
 import 'dart:ffi' as ffi;
 
 typedef StartRecordingFunc = ffi.Void Function();
@@ -72,7 +74,7 @@ class HuAccumponistApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF1A1A2E),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
         colorScheme: const ColorScheme.dark(primary: Color(0xFFE94560)),
       ),
       home: const ScoreViewerPage(),
@@ -89,8 +91,8 @@ class ScoreViewerPage extends StatefulWidget {
 
 class _ScoreViewerPageState extends State<ScoreViewerPage> {
   bool _isDrawingMode = false;
+  final bool _hasMusicSheet = true; // Track if a music sheet is loaded
 
-  // ✅ Add this method to the state class
   void _goToNavPage() {
     Navigator.of(context).push(
       PageRouteBuilder(
@@ -115,93 +117,109 @@ class _ScoreViewerPageState extends State<ScoreViewerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Stack(
-          children: [
-            // LAYER 1: PDF Viewer
-            // LAYER 1: temp replacement
+        child: LiquidGlassView(
+          // Everything the glass buttons should refract goes here. This is
+          // still rendered normally and stays fully interactive (e.g. the
+          // Drawing_Overlay's gestures keep working) — it's just *also*
+          // captured for the lenses on Skia backends like macOS desktop.
+          backgroundWidget: Stack(
+            children: [
+              // LAYER 1: PDF Viewer (or placeholder background)
+              // 1. If true, look at how the Widget sits right under the if statement (no braces!)
+              if (_hasMusicSheet)
                 Positioned.fill(
-                  child: Container(color: Colors.red),
-  ),
-            //Positioned.fill(
-              //child: SfPdfViewer.asset(
-               // 'assets/placeholder_score.pdf',
-               // canShowScrollHead: false,
-                //pageLayoutMode: PdfPageLayoutMode.single,
-               // scrollDirection: PdfScrollDirection.horizontal,
-              //),
-            //),
-
-            // LAYER 2: Drawing overlay
-            Positioned.fill(
-              child: Drawing_Overlay(isDrawingMode: _isDrawingMode),
-            ),
-
-            // LAYER 3: Floating Toolbar
-            Positioned(
-              top: 16,
-              right: 16,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF16213E).withValues(alpha: 0.85),
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.edit_outlined,
-                        size: 22,
-                        color: _isDrawingMode
-                            ? const Color(0xFFE94560)
-                            : Colors.white,
-                      ),
-                      onPressed: () =>
-                          setState(() => _isDrawingMode = !_isDrawingMode),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.more_horiz, size: 22),
-                      color: Colors.white,
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            // LAYER 4: Draggable Recorder Button
-            Draggable_Recorder_Button(
-              onToggle: (isRecording) {
-                if (isRecording) {
-                  _nativeBridge.startRecording();
-                } else {
-                  _nativeBridge.stopRecording();
-                }
-              },
-            ),
-
-            // ✅ LAYER 5: Nav Button — now INSIDE children: [ ]
-            Positioned(
-              bottom: 32,
-              left: 16,
-              child: GestureDetector(
-                onTap: _goToNavPage,
-                child: Container(
-                  padding: const EdgeInsets.all(14),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFE94560),
-                    borderRadius: BorderRadius.circular(16),
+                  child: SfPdfViewer.asset(
+                    'assets/test.pdf',
+                    canShowScrollHead: false,
+                    pageLayoutMode: PdfPageLayoutMode.single,
+                    scrollDirection: PdfScrollDirection.horizontal,
                   ),
-                  child: const Icon(Icons.menu, color: Colors.white),
+                ) // 👈 Note: NO trailing comma or semicolon directly after the widget if an 'else' follows
+              // 2. If false, the else statement also has no braces
+              else
+                Positioned.fill(
+                  child: Container(color: const Color.fromARGB(255, 236, 236, 236)),
+                ), // 👈 Comma goes here at the very end of the whole if/else block
+
+              // LAYER 2: Drawing overlay
+              Positioned.fill(
+                child: Drawing_Overlay(isDrawingMode: _isDrawingMode),
+              ),
+            ],
+          ), // closes Stack (backgroundWidget)
+
+          child: Stack(
+            children: [
+              // LAYER 3: Floating Toolbar
+              Positioned(
+                top: 16,
+                right: 16,
+                child: LiquidGlass(
+                  borderRadius: BorderRadius.circular(30),
+                  blur: 18,
+                  tintOpacity: 0.16,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.edit_outlined,
+                            size: 22,
+                            color: _isDrawingMode
+                                ? const Color(0xFFE94560)
+                                : const Color.fromARGB(255, 170, 170, 170),
+                          ),
+                          onPressed: () =>
+                              setState(() => _isDrawingMode = !_isDrawingMode),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.more_horiz, size: 22),
+                          color: const Color.fromARGB(255, 170, 170, 170),
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-            ),
 
-          ], // ✅ children closes HERE, after all 5 layers
-        ),
-      ),
-    );
+              // LAYER 4: Draggable Recorder Button
+              Draggable_Recorder_Button(
+                onToggle: (isRecording) {
+                  if (isRecording) {
+                    _nativeBridge.startRecording();
+                  } else {
+                    _nativeBridge.stopRecording();
+                  }
+                },
+              ),
+
+              // LAYER 5: Nav Button
+              Positioned(
+                bottom: 32,
+                left: 16,
+                child: GestureDetector(
+                  onTap: _goToNavPage,
+                  child: LiquidGlass(
+                    borderRadius: BorderRadius.circular(16),
+                    blur: 14,
+                    tintOpacity: 0.20,
+                    child: Padding(
+                      padding: const EdgeInsets.all(14),
+                      child: Icon(
+                        Icons.search,
+                        color: const Color.fromARGB(255, 170, 170, 170),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ], // closes children of foreground Stack
+          ), // closes foreground Stack (child:)
+        ), // closes LiquidGlassView
+      ), // closes SafeArea
+    ); // closes Scaffold
   }
 }

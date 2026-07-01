@@ -67,7 +67,9 @@ class _StrokePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    for (final s in strokes) _drawStroke(canvas, s);
+    for (final s in strokes) {
+      _drawStroke(canvas, s);
+    }
     _drawStroke(canvas, currentStroke);
   }
 
