@@ -6,6 +6,7 @@ use std::mem::MaybeUninit;
 use std::ops::Range;
 use std::sync::mpsc::Receiver;
 use std::sync::mpsc::Sender;
+use std::time::Instant;
 
 pub fn create_stream(tx: Sender<Vec<f32>>) -> Result<Stream, Box<dyn std::error::Error>> {
     let host = cpal::default_host();
@@ -37,14 +38,16 @@ pub fn start_processing_loop(rx: Receiver<Vec<f32>>) {
     let mut audio_vault: Vec<f32> = Vec::new();
     let mut input_data_buffer = vec![0.0f32; 1024];
     let mut output_spectrum = crate::dsp::FFT.make_output_vec();
-    let user_data = MaybeUninit::<PieceData>::uninit();
+    let user_data: Option<PieceData> = None;
     let piece_data = ACTIVE_PIECE.lock().unwrap();
+    let start_time = Instant::now();
 
     // This loop runs when data is recieved from rx
     while let Ok(chunk) = rx.recv() {
         audio_vault.extend_from_slice(&chunk);
 
         while audio_vault.len() >= 1024 {
+            let current_ms = start_time.elapsed().as_millis() as u32;
             let processing_data = &audio_vault[0..1024];
             let rms: f32 = (processing_data
             .iter()
@@ -63,7 +66,8 @@ pub fn start_processing_loop(rx: Receiver<Vec<f32>>) {
             if let Some(ref piece) = *piece_data {
                 match &piece.curr_phase {
                     1 => {
-                        let notes = crate::dsp::process_dsp(&output_spectrum);
+                        let target_notes = crate::dsp::get_current_targets(current_ms, piece);
+                        let is_perfect = crate::dsp::process_dsp(&output_spectrum, &mut user_data, &target_notes);
                     }
                     2 | 3 => {}
                 }
