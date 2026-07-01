@@ -13,8 +13,8 @@ ONNX model weights (~100 MB total) are downloaded automatically on first run.
 Output:
   list[{"hz": float, "start": float, "duration": float, "dynamic": float}]
     hz       — frequency in Hz  (A4 = 440)
-    start    — onset in seconds from the start of the piece
-    duration — duration in seconds
+    start    — onset in quarter-note beats from the start of the piece
+    duration — length in quarter-note beats  (quarter=1, half=2, eighth=0.5)
     dynamic  — 0.0 (ppp) … 1.0 (fff),  default 0.60 (mf)
 
 Usage:
@@ -43,7 +43,7 @@ import fitz          # PyMuPDF  (pip install pymupdf)
 import music21
 import music21.stream as m21stream
 from music21 import note as m21note, chord as m21chord
-from music21 import tempo as m21tempo, dynamics as m21dyn
+from music21 import tempo as m21tempo, dynamics as m21dyn, meter as m21meter
 from collections import defaultdict
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -507,9 +507,14 @@ def detect_dynamics(orig_bgr: np.ndarray,
 def musicxml_to_notes(xml_path: str,
                        time_offset:  float = 0.0,
                        default_bpm:  float = DEFAULT_BPM,
-                       dyn_events:   list  = None) -> list:
+                       dyn_events:   list  = None) -> tuple:
     """
-    Parse MusicXML → list[{hz, start, duration, dynamic}].
+    Parse MusicXML → (notes, meta).
+
+    notes: list[{hz, start, duration, dynamic}]
+      start    — onset in quarter-note beats from the beginning of the piece
+      duration — length in quarter-note beats (quarter=1, half=2, eighth=0.5, etc.)
+    meta:  {"bpm": float, "bpm_beat": float, "time_signature": str}
 
     dyn_events: optional list from detect_dynamics().
     Dotted notes are handled automatically: music21 encodes augmentation
@@ -518,8 +523,18 @@ def musicxml_to_notes(xml_path: str,
     """
     score  = music21.converter.parse(xml_path)
     tempos = list(score.flatten().getElementsByClass(m21tempo.MetronomeMark))
-    bpm    = float(tempos[0].number) if tempos else default_bpm
+    if tempos:
+        bpm      = float(tempos[0].number)
+        ref      = getattr(tempos[0], "referent", None)
+        bpm_beat = float(ref.quarterLength) if ref is not None else 1.0
+    else:
+        bpm      = default_bpm
+        bpm_beat = 1.0
     qsecs  = 60.0 / bpm
+
+    ts_list = list(score.flatten().getElementsByClass(m21meter.TimeSignature))
+    time_sig = (f"{ts_list[0].numerator}/{ts_list[0].denominator}"
+                if ts_list else "4/4")
 
     # ── music21 snapshot dynamics (from MusicXML, if any) ────────────────────
     m21_marks = sorted(
@@ -585,10 +600,10 @@ def musicxml_to_notes(xml_path: str,
             if isinstance(el, m21note.Rest):
                 continue
             offset   = float(el.offset)
-            start    = round(time_offset + offset * qsecs, 4)
+            start    = round(time_offset + offset, 4)
             # el.quarterLength already includes augmentation dots
             # (dotted quarter = 1.5, dotted eighth = 0.75, etc.)
-            duration = round(float(el.quarterLength) * qsecs, 4)
+            duration = round(float(el.quarterLength), 4)
             dynamic  = round(dynamic_at(offset), 3)
 
             if isinstance(el, m21note.Note):
@@ -599,7 +614,8 @@ def musicxml_to_notes(xml_path: str,
                     notes.append({"hz": round(p.frequency, 3),
                                   "start": start, "duration": duration, "dynamic": dynamic})
 
-    return sorted(notes, key=lambda n: (n["start"], n["hz"]))
+    meta = {"bpm": bpm, "bpm_beat": bpm_beat, "time_signature": time_sig}
+    return sorted(notes, key=lambda n: (n["start"], n["hz"])), meta
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -665,9 +681,9 @@ def images_to_pdf(bgr_pages: list, out_path: str, dpi: int = 200) -> None:
 # ─────────────────────────────────────────────────────────────────────────────
 
 def convert(pdf_path: str, bpm: float = DEFAULT_BPM,
-            annotated_pdf: str = None) -> list:
+            annotated_pdf: str = None) -> dict:
     """
-    Full pipeline: PDF → list[{hz, start, duration, dynamic}]
+    Full pipeline: PDF → {name, bpm, time_signature, notes}
     If annotated_pdf is given (or set to True → auto-name), also saves an
     annotated PDF showing every detected notehead coloured by duration type.
     """
@@ -682,9 +698,11 @@ def convert(pdf_path: str, bpm: float = DEFAULT_BPM,
     print("Step 2/4  Checking oemer ONNX checkpoints...")
     _ensure_checkpoints()
 
-    all_notes   = []
-    ann_pages   = []
-    time_offset = 0.0
+    all_notes    = []
+    ann_pages    = []
+    time_offset  = 0.0
+    score_meta   = {"bpm": bpm, "time_signature": "4/4"}
+    piece_name   = os.path.splitext(os.path.basename(pdf_path))[0]
 
     for i, img_path in enumerate(img_paths):
         label   = f"page {i+1}/{len(img_paths)}"
@@ -719,8 +737,10 @@ def convert(pdf_path: str, bpm: float = DEFAULT_BPM,
             dyn_ev = None
 
         print(f"Step 4/4  Parsing MusicXML ({label})...")
-        page_notes = musicxml_to_notes(xml_path, time_offset=time_offset,
-                                       default_bpm=bpm, dyn_events=dyn_ev)
+        page_notes, page_meta = musicxml_to_notes(xml_path, time_offset=time_offset,
+                                                   default_bpm=bpm, dyn_events=dyn_ev)
+        if i == 0:
+            score_meta = page_meta   # use first page for global metadata
         if page_notes:
             time_offset = max(n["start"] + n["duration"] for n in page_notes)
         all_notes.extend(page_notes)
@@ -738,7 +758,14 @@ def convert(pdf_path: str, bpm: float = DEFAULT_BPM,
         print(f"Annotated PDF → {annotated_pdf}")
 
     print(f"{'─'*60}")
-    return sorted(all_notes, key=lambda n: (n["start"], n["hz"]))
+    sorted_notes = sorted(all_notes, key=lambda n: (n["start"], n["hz"]))
+    return {
+        "name":           piece_name,
+        "bpm":            score_meta["bpm"],
+        "bpm_beat":       score_meta["bpm_beat"],
+        "time_signature": score_meta["time_signature"],
+        "notes":          sorted_notes,
+    }
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -761,20 +788,26 @@ if __name__ == "__main__":
     t0 = _time.time()
 
     print(f"Converting: {pdf}")
-    notes = convert(pdf, annotated_pdf=ann_pdf)
+    result = convert(pdf, annotated_pdf=ann_pdf)
 
     elapsed = _time.time() - t0
+    notes   = result["notes"]
 
-    print(f"\nTotal notes : {len(notes)}")
+    print(f"\nPiece name  : {result['name']}")
+    print(f"BPM         : {result['bpm']}  (beat = {result['bpm_beat']} quarter lengths)")
+    print(f"Time sig    : {result['time_signature']}")
+    print(f"Total notes : {len(notes)}")
     if notes:
-        piece_start = min(n["start"] for n in notes)
-        piece_end   = max(n["start"] + n["duration"] for n in notes)
-        piece_dur   = piece_end - piece_start
-        dyn_vals    = [n["dynamic"] for n in notes]
+        piece_start  = min(n["start"] for n in notes)
+        piece_end    = max(n["start"] + n["duration"] for n in notes)
+        piece_beats  = piece_end - piece_start
+        bpm_val      = result["bpm"]
+        piece_dur_s  = piece_beats * (60.0 / bpm_val)
+        dyn_vals     = [n["dynamic"] for n in notes]
 
-        print(f"Piece start : {piece_start:.3f} s")
-        print(f"Piece end   : {piece_end:.3f} s")
-        print(f"Total time  : {piece_dur:.3f} s  ({piece_dur/60:.2f} min)")
+        print(f"Piece start : {piece_start:.3f} beats")
+        print(f"Piece end   : {piece_end:.3f} beats")
+        print(f"Total time  : {piece_beats:.1f} beats  ({piece_dur_s:.1f} s / {piece_dur_s/60:.2f} min)")
         print(f"Dynamic     : min={min(dyn_vals):.3f}  max={max(dyn_vals):.3f}"
               f"  avg={sum(dyn_vals)/len(dyn_vals):.3f}")
 
@@ -787,5 +820,5 @@ if __name__ == "__main__":
         print(f"  … and {len(notes) - 10} more")
 
     with open(out_json, "w") as f:
-        json.dump(notes, f, indent=2)
+        json.dump(result, f, indent=2)
     print(f"Notes JSON  → {out_json}")
